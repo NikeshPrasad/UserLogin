@@ -34,6 +34,9 @@
 		<div id="top-banner">
 			<span>famebook</span>
         </div>
+        <div id="message">
+        	<h3 style="${messageCoor}">${message }</h3>
+        </div>
         <div id="main-content" class="container">
             <div id="login">
                 <h1 style="margin: 20px;">Login</h1><hr>
@@ -56,7 +59,7 @@
                 </form>
             </div>
             <div id="new-user" class="col-sm-5">
-                <a href="">New User? Register here</a>
+                <a href="register">New User? Register here</a>
             </div>
         </div>
 	</body>

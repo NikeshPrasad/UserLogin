@@ -49,6 +49,9 @@
         <div id="top-banner">
             <span>famebook</span>
         </div>
+        <div id="message">
+        	<h3 style="${messageCoor}">${message }</h3>
+        </div>
         <div id="main-content" class="container">
             <div id="user-registration">
                 <h1 style="margin:20px 0;">Registration</h1><hr>
@@ -99,7 +102,7 @@
                 </sp:form>
             </div>
             <div id="already-registered" class="col-sm-6">
-                <a href="">Already Registered? Login here</a>
+                <a href="login">Already Registered? Login here</a>
             </div>
         </div>
 	</body>
