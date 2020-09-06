@@ -3,6 +3,7 @@ package com.accounts.controller;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,22 +33,38 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/registerUser", method=RequestMethod.POST)
+	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public ModelAndView registerEmployee(@ModelAttribute("user") User user, @RequestParam("rawPassword") String rawPassword) {
 		ModelAndView mv = new ModelAndView();
 		String message = null;
+		String messageColor = null;
 		
 		String encodedPassword = encodePassword(rawPassword);
 		if (encodedPassword != null) {
 			user.setPassword(encodedPassword);
 			dao.save(user);
-			message = "Added user";
+			message = "Added user, enter your details to login";
+			messageColor = "green";
 			mv.setViewName("login");
 		} else {
 			message = "Failed to add user";
+			messageColor = "red";
 			mv.setViewName("register");
 		}
 		mv.addObject("message", message);
+		mv.addObject("messageColor", messageColor);
+		return mv;
+	}
+	
+	@RequestMapping(value="/authenticate", method=RequestMethod.GET)
+	public ModelAndView authenticate(@RequestParam("username") String username, @RequestParam("password") String password) {
+		ModelAndView mv = new ModelAndView();
+		String message = null;
+		
+		Optional<User> op = dao.findById(username);
+		
+		// TODO authenticate user and return proper message & view
+		
 		return mv;
 	}
 	
