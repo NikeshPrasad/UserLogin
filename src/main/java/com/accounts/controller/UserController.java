@@ -60,11 +60,24 @@ public class UserController {
 	public ModelAndView authenticate(@RequestParam("username") String username, @RequestParam("password") String password) {
 		ModelAndView mv = new ModelAndView();
 		String message = null;
+		String messageColor = "red";
 		
 		Optional<User> op = dao.findById(username);
 		
-		// TODO authenticate user and return proper message & view
+		if (op.isPresent()) {
+			User user = op.get();
+			if (user.getPassword().equals(password)) {
+				message = "Login successfull";
+				messageColor = "green";
+			} else {
+				message = "Wrong password entered";
+			}
+		} else {
+			message = "Username is not registered";
+		}
 		
+		mv.addObject("message", message);
+		mv.addObject("messageColor", messageColor);
 		return mv;
 	}
 	
